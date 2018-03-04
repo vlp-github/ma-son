@@ -1,8 +1,9 @@
 var webRoom = "/webRoom";
-
-var socket = io.connect('https://maison.vlp-server.com:36782/');
+var socket;
 
 $(document).ready(function(){
+	socket = io.connect('https://maison.vlp-server.com:36782');
+		
 	socket.on('connect', function(){
 		socket.emit('init');
 	});

@@ -1,7 +1,6 @@
 {
 	"http" :  {
 				"index": "/index.html",
-				"port": 1337,
 				"www": "./www",
 				"mime": {
 					"html": "text/html",
@@ -16,8 +15,5 @@
 				"error" : {
 					"404" : "./www/errors/404.html"
 				}
-			},	
-	"users" : {
-				"vlp": {"email":"vlp@vlp-server.com","password":"premier"}
 			}
 }

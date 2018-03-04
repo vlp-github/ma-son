@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http');
 var fs = require('fs');
 var conf = require('./conf.json');
+var system = require('./../system.json');
 var url = require('url');
 var io = require('socket.io')(http);
 var sqlite3 = require('sqlite3').verbose();
@@ -15,7 +16,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var debug = true; 
 
-var httpServer = http.createServer(onRequest).listen(conf.http.port, function(){
+var httpServer = http.createServer(onRequest).listen(1337, function(){
 		if (debug) console.log('Server starts...')
 	});
 
@@ -26,6 +27,7 @@ function onRequest(request, response) {
 	try{
 	response.writeHead(200, {'Content-Type': conf.http.mime[extension]});
 		try{
+		if (debug) console.log(conf.http.www + pathname);
 		response.end(fs.readFileSync(conf.http.www + pathname));
 		}catch(e){
 		response.writeHead(404, {'Content-Type': 'text/html'});
@@ -53,7 +55,7 @@ io.sockets.on('connection', function (socket) {
 		var jsonStr = JSON.stringify(message);
 		var plug =message.plug;
 		var state =message.state;
-		request('https://mypi.fr/'+plug+'_'+state+'.php', { json: true }, (err, res, body) => {
+		request(system.pi.url+plug+'_'+state+'.php', { json: true }, (err, res, body) => {
 			if (err) { return console.log(err); }
 		});
 	});
