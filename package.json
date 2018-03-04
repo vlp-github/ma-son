@@ -1,0 +1,17 @@
+{
+  "name": "maison",
+  "version": "0.0.1",
+  "description": "maison",
+  "dependencies": {
+    "express": "~4",
+    "socket.io": "~2",
+    "request": "~2",
+    "cron": "~1",
+    "delay": "~2",
+    "dent": "~0.2",
+    "sqlite3": "~3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
